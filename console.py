@@ -22,7 +22,6 @@ class HBNBCommand(cmd.Cmd):
     """ HBNH console """
     prompt = '(hbnb) '
 
-    
     def do_EOF(self, arg):
         """Exits console"""
         return True
@@ -30,7 +29,6 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         """ overwriting the emptyline method """
         return False
-
     
     def do_quit(self, arg):
         """Quit command to exit the program"""
