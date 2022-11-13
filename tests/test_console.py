@@ -2,15 +2,15 @@
 """
 Contains the class TestConsoleDocs
 """
-
-import console
-from contextlib import redirect_stdout
-import inspect
 import io
 import os
+from contextlib import redirect_stdout
+import console
+import inspect
 import pep8
 import unittest
 HBNBCommand = console.HBNBCommand
+
 
 class TestConsoleDocs(unittest.TestCase):
     """Class for testing documentation of the console"""
@@ -21,7 +21,6 @@ class TestConsoleDocs(unittest.TestCase):
         self.assertEqual(result.total_errors, 0,
                          "Found code style errors (and warnings).")
 
-        
     def test_pep8_conformance_test_console(self):
         """Test that tests/test_console.py conforms to PEP8."""
         pep8s = pep8.StyleGuide(quiet=True)
@@ -35,7 +34,7 @@ class TestConsoleDocs(unittest.TestCase):
                          "console.py needs a docstring")
         self.assertTrue(len(console.__doc__) >= 1,
                         "console.py needs a docstring")
-        
+
     def test_HBNBCommand_class_docstring(self):
         """Test for the HBNBCommand class docstring"""
         self.assertIsNot(HBNBCommand.__doc__, None,
@@ -43,22 +42,22 @@ class TestConsoleDocs(unittest.TestCase):
         self.assertTrue(len(HBNBCommand.__doc__) >= 1,
                         "HBNBCommand class needs a docstring")
 
-        
+
 class TestConsoleCommands(unittest.TestCase):
-    """Class to test functionality of console commands"""
+    """test console commands"""
     @classmethod
     def setUpClass(cls):
-        """Create command console to test with"""
+        """Create command console for test"""
         cls.cmdcon = HBNBCommand()
-        
+
     def setUp(self):
-        """Create in memory buffer to capture stdout"""
+        """Create in memory buffer for stdout"""
         self.output = io.StringIO()
-        
+
     def tearDown(self):
         """Close in memory buffer after test completes"""
         self.output.close()
-    
+
     @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db',
                      "Testing DBStorage")
     def test_do_create(self):
@@ -90,11 +89,11 @@ class TestConsoleCommands(unittest.TestCase):
                              '[a-z0-9]{4}-'
                              '[a-z0-9]{4}-'
                              '[a-z0-9]{12}')
-            
+
     @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') != 'db',
                      "Testing DBStorage")
     def test_do_create_db(self):
-        """Test do_create method of console"""
+        """Test do_create"""
         with redirect_stdout(self.output):
             self.cmdcon.onecmd('create')
             self.assertEqual(self.output.getvalue(),
